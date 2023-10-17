@@ -1,0 +1,32 @@
+/* Amplify Params - DO NOT EDIT
+	API_BIBIPAPP_CARTABLE_ARN
+	API_BIBIPAPP_CARTABLE_NAME
+	API_BIBIPAPP_GRAPHQLAPIENDPOINTOUTPUT
+	API_BIBIPAPP_GRAPHQLAPIIDOUTPUT
+	API_BIBIPAPP_GRAPHQLAPIKEYOUTPUT
+	API_BIBIPAPP_TRIPTABLE_ARN
+	API_BIBIPAPP_TRIPTABLE_NAME
+	AUTH_BIBIPAPP5F65708E5F65708E_USERPOOLID
+	ENV
+	FUNCTION_BIBIPAPP5F65708E5F65708ECREATEAUTHCHALLENGE_NAME
+	FUNCTION_BIBIPAPP5F65708E5F65708EDEFINEAUTHCHALLENGE_NAME
+	FUNCTION_BIBIPAPP5F65708E5F65708EVERIFYAUTHCHALLENGERESPONSE_NAME
+	REGION
+	STORAGE_S3BIBIPAPPSTORAGE8F58D563_BUCKETNAME
+Amplify Params - DO NOT EDIT */
+
+/**
+ * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
+ */
+exports.handler = async (event) => {
+    console.log(`EVENT: ${JSON.stringify(event)}`);
+    return {
+        statusCode: 200,
+    //  Uncomment below to enable CORS requests
+    //  headers: {
+    //      "Access-Control-Allow-Origin": "*",
+    //      "Access-Control-Allow-Headers": "*"
+    //  }, 
+        body: JSON.stringify('Hello from Lambda!'),
+    };
+};

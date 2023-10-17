@@ -4,7 +4,8 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import { type JWT } from "next-auth/jwt";
+import CognitoProvider from "next-auth/providers/cognito";
 
 import { env } from "~/env.mjs";
 
@@ -14,19 +15,16 @@ import { env } from "~/env.mjs";
  *
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
+
 declare module "next-auth" {
   interface Session extends DefaultSession {
-    user: DefaultSession["user"] & {
+    user: {
       id: string;
+      token?: JWT;
       // ...other properties
       // role: UserRole;
-    };
+    } & DefaultSession["user"];
   }
-
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
 }
 
 /**
@@ -36,18 +34,28 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, token }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: token.sub,
-      },
-    }),
+    jwt: ({ token, account, profile }) => {
+      if (account) token.account = account;
+      if (profile) token.name = profile["cognito:username"];
+
+      return token;
+    },
+    session({ session, token }) {
+      if (token.account?.providerAccountId) {
+        session.user.id = token.account?.providerAccountId;
+        // session.user.role = user.role; <-- put other properties on the session here
+      }
+      if (token.name) session.user.name = token.name;
+      session.user.token = token;
+      return session;
+    },
   },
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    CognitoProvider({
+      clientId: env.COGNITO_CLIENT_ID,
+      clientSecret: env.COGNITO_CLIENT_SECRET,
+      issuer:
+        "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_9iWAyNn0o",
     }),
     /**
      * ...add more providers here.

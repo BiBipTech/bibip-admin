@@ -6,11 +6,17 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
+import {
+  ApolloClient,
+  InMemoryCache,
+  NormalizedCacheObject,
+} from "@apollo/client";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { type Session } from "next-auth";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { env } from "~/env.mjs";
 
 import { getServerAuthSession } from "~/server/auth";
 
@@ -24,6 +30,7 @@ import { getServerAuthSession } from "~/server/auth";
 
 interface CreateContextOptions {
   session: Session | null;
+  apolloClient: ApolloClient<NormalizedCacheObject> | null;
 }
 
 /**
@@ -36,9 +43,13 @@ interface CreateContextOptions {
  *
  * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
-const createInnerTRPCContext = ({ session }: CreateContextOptions) => {
+const createInnerTRPCContext = ({
+  session,
+  apolloClient,
+}: CreateContextOptions) => {
   return {
     session,
+    apolloClient,
   };
 };
 
@@ -55,8 +66,17 @@ export const createTRPCContext = async ({
   // Get the session from the server using the getServerSession wrapper function
   const session = await getServerAuthSession({ req, res });
 
+  const apolloClient = new ApolloClient({
+    uri: env.NEXT_PUBLIC_AWS_APPSYNC_GRAPHQL_ENDPOINT,
+    headers: {
+      "x-api-key": env.NEXT_PUBLIC_AWS_APPSYNC_API_KEY,
+    },
+    cache: new InMemoryCache(),
+  });
+
   return createInnerTRPCContext({
     session,
+    apolloClient,
   });
 };
 

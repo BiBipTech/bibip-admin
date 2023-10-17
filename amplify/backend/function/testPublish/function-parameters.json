@@ -1,0 +1,60 @@
+{
+  "permissions": {
+    "api": {
+      "bibipapp": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    },
+    "function": {
+      "bibipapp5f65708e5f65708eCreateAuthChallenge": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "bibipapp5f65708e5f65708eDefineAuthChallenge": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "bibipapp5f65708e5f65708eVerifyAuthChallengeResponse": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "auth": {
+      "bibipapp5f65708e5f65708e": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "storage": {
+      "s3bibipappstorage8f58d563": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Trip:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Car:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

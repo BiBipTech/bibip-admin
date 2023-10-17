@@ -1,5 +1,8 @@
+import { gql } from "@apollo/client";
+import { log } from "console";
 import { z } from "zod";
-
+import { Car, ModelCarConnection } from "~/API";
+import * as queries from "~/graphql/queries";
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -15,7 +18,14 @@ export const exampleRouter = createTRPCRouter({
       };
     }),
 
-  getSecretMessage: protectedProcedure.query(() => {
+  getSecretMessage: protectedProcedure.query(({ ctx: { apolloClient } }) => {
+    // const res = await apolloClient?.query<{
+    //   listCars: { items: ModelCarConnection[] };
+    // }>({
+    //   query: gql(queries.listCars),
+    // });
+    // log(res?.data.listCars.items);
+
     return "you can now see this secret message!";
   }),
 });

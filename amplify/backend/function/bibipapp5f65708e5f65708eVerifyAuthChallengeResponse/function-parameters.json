@@ -1,0 +1,17 @@
+{
+  "trigger": true,
+  "modules": [
+    "boilerplate-verify"
+  ],
+  "parentResource": "bibipapp5f65708e5f65708e",
+  "functionName": "bibipapp5f65708e5f65708eVerifyAuthChallengeResponse",
+  "resourceName": "bibipapp5f65708e5f65708eVerifyAuthChallengeResponse",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "C:\\snapshot\\node_modules\\@aws-amplify\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\VerifyAuthChallengeResponse",
+  "triggerTemplate": "VerifyAuthChallengeResponse.json.ejs",
+  "triggerEventPath": "VerifyAuthChallengeResponse.event.json",
+  "roleName": "bibipapp5f65708e5f65708eVerifyAuthChallengeResponse",
+  "skipEdit": true,
+  "enableCors": false
+}

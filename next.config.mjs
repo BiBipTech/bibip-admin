@@ -14,6 +14,17 @@ const config = {
         destination: "/dashboard",
         permanent: true,
     }, ],
+    images: {
+        remotePatterns: [{
+                hostname: "ui-avatars.com",
+                protocol: "https",
+            },
+            {
+                hostname: "bibip-app-storage-8f58d563204655-staging.s3.eu-central-1.amazonaws.com",
+                protocol: "https",
+            }
+        ]
+    },
     /**
      * If you are using `appDir` then you must comment the below `i18n` config out.
      *

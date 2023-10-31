@@ -11,8 +11,7 @@ export const env = createEnv({
             .enum(["development", "test", "production"])
             .default("development"),
         NEXTAUTH_SECRET: process.env.NODE_ENV === "production" ?
-            z.string().min(1) :
-            z.string().min(1).optional(),
+            z.string().min(1) : z.string().min(1).optional(),
         NEXTAUTH_URL: z.preprocess(
             // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
             // Since NextAuth.js automatically uses the VERCEL_URL if present.
@@ -23,6 +22,7 @@ export const env = createEnv({
         // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
         COGNITO_CLIENT_ID: z.string(),
         COGNITO_CLIENT_SECRET: z.string(),
+        BIBIP_ADMIN_PANEL_API_ENDPOINT: z.string().url(),
     },
 
     /**
@@ -33,6 +33,7 @@ export const env = createEnv({
     client: {
         NEXT_PUBLIC_AWS_APPSYNC_GRAPHQL_ENDPOINT: z.string(),
         NEXT_PUBLIC_AWS_APPSYNC_API_KEY: z.string(),
+        NEXT_PUBLIC_BIBIP_S3_BUCKET_API_ENDPOINT: z.string().url(),
     },
 
     /**
@@ -45,8 +46,10 @@ export const env = createEnv({
         NEXTAUTH_URL: process.env.NEXTAUTH_URL,
         COGNITO_CLIENT_ID: process.env.COGNITO_CLIENT_ID,
         COGNITO_CLIENT_SECRET: process.env.COGNITO_CLIENT_SECRET,
+        BIBIP_ADMIN_PANEL_API_ENDPOINT: process.env.BIBIP_ADMIN_PANEL_API_ENDPOINT,
         NEXT_PUBLIC_AWS_APPSYNC_GRAPHQL_ENDPOINT: process.env.NEXT_PUBLIC_AWS_APPSYNC_GRAPHQL_ENDPOINT,
         NEXT_PUBLIC_AWS_APPSYNC_API_KEY: process.env.NEXT_PUBLIC_AWS_APPSYNC_API_KEY,
+        NEXT_PUBLIC_BIBIP_S3_BUCKET_API_ENDPOINT: process.env.NEXT_PUBLIC_BIBIP_S3_BUCKET_API_ENDPOINT,
     },
     /**
      * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

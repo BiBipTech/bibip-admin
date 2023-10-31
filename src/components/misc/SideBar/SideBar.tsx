@@ -9,7 +9,7 @@ import {
   FaCalendar,
   FaInfoCircle,
 } from "react-icons/fa";
-import { IoDocumentText, IoDocumentTextOutline } from "react-icons/io5";
+import { IoDocumentText } from "react-icons/io5";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { Paths } from "./Sidebar.types";
@@ -59,7 +59,7 @@ const SideBar: FunctionComponent<SideBarProps> = (props: SideBarProps) => {
           </div>
           <div className="px-2 pb-1">
             <NavButton
-              to={Paths.Dashboard}
+              href={Paths.Dashboard}
               name="Dashboard"
               Icon={MdSpaceDashboard}
               active={router.pathname.includes(Paths.Dashboard)}
@@ -67,7 +67,7 @@ const SideBar: FunctionComponent<SideBarProps> = (props: SideBarProps) => {
           </div>
           <div className="px-2 pb-1">
             <NavButton
-              to={Paths.Documents}
+              href={Paths.Documents}
               name="Belgeler"
               Icon={IoDocumentText}
               active={router.pathname.includes(Paths.Documents)}
@@ -75,7 +75,7 @@ const SideBar: FunctionComponent<SideBarProps> = (props: SideBarProps) => {
           </div>
           <div className="px-2 pb-1">
             <NavButton
-              to={Paths.Users}
+              href={Paths.Users}
               name="Sürücüler"
               Icon={FaUsers}
               active={router.pathname.includes(Paths.Users)}
@@ -83,7 +83,7 @@ const SideBar: FunctionComponent<SideBarProps> = (props: SideBarProps) => {
           </div>
           <div className="px-2 pb-1">
             <NavButton
-              to={Paths.Reservations}
+              href={Paths.Reservations}
               name="Rezervasyonlar"
               Icon={BsFillBookmarkCheckFill}
               active={router.pathname.includes(Paths.Reservations)}
@@ -92,7 +92,7 @@ const SideBar: FunctionComponent<SideBarProps> = (props: SideBarProps) => {
 
           <div className="px-2 pb-1">
             <NavButton
-              to={Paths.Vehicles}
+              href={Paths.Vehicles}
               name="Araçlar"
               Icon={FaCar}
               active={router.pathname.includes(Paths.Vehicles)}
@@ -100,7 +100,7 @@ const SideBar: FunctionComponent<SideBarProps> = (props: SideBarProps) => {
           </div>
           <div className="px-2 pb-1">
             <NavButton
-              to={Paths.Missions}
+              href={Paths.Missions}
               name="Görevler"
               Icon={FaFlag}
               active={router.pathname.includes(Paths.Missions)}
@@ -108,7 +108,7 @@ const SideBar: FunctionComponent<SideBarProps> = (props: SideBarProps) => {
           </div>
           <div className="px-2 pb-1">
             <NavButton
-              to={Paths.Calendar}
+              href={Paths.Calendar}
               name="Takvim"
               Icon={FaCalendar}
               active={router.pathname.includes(Paths.Calendar)}
@@ -116,7 +116,7 @@ const SideBar: FunctionComponent<SideBarProps> = (props: SideBarProps) => {
           </div>
           <div className="px-2 pb-1">
             <NavButton
-              to={Paths.CarInfo}
+              href={Paths.CarInfo}
               name="Araç Bilgileri"
               Icon={FaInfoCircle}
               active={router.pathname.includes(Paths.CarInfo)}
@@ -124,7 +124,7 @@ const SideBar: FunctionComponent<SideBarProps> = (props: SideBarProps) => {
           </div>
           <div className="px-2 pb-1">
             <NavButton
-              to={Paths.PastMissions}
+              href={Paths.PastMissions}
               name="Geçmiş Görevler"
               Icon={AiOutlineHistory}
               active={router.pathname.includes(Paths.PastMissions)}

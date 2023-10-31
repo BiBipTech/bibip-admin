@@ -5,6 +5,8 @@ export const useLoader = (conditionArray: boolean[]) => {
   const loader = useContext(LoaderContext);
 
   useEffect(() => {
-    // return () => loader.setIsLoading(false);
+    if (conditionArray.includes(true)) loader.setIsLoading(true);
+
+    return () => loader.setIsLoading(false);
   }, [conditionArray, loader]);
 };

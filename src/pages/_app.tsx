@@ -1,6 +1,7 @@
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
+import { Inter } from "next/font/google";
 
 import { api } from "~/utils/api";
 
@@ -9,6 +10,13 @@ import { LoaderContext } from "~/utils/contexts/LoaderContext";
 import { useState } from "react";
 import SpinnerOverlay from "~/components/misc/Spinner/SpinnerOverlay";
 import AppLayout from "~/components/layout/AppLayout";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -20,11 +28,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <LoaderContext.Provider value={{ isLoading, setIsLoading }}>
         {isLoading && <SpinnerOverlay />}
-        <AppLayout>
-          <main className="">
+        <main className={`${inter.variable} font-sans`}>
+          <AppLayout>
             <Component {...pageProps} />
-          </main>
-        </AppLayout>
+          </AppLayout>
+        </main>
         {/* <ToastContainer /> */}
       </LoaderContext.Provider>
     </SessionProvider>

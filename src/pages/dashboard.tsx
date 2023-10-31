@@ -18,10 +18,20 @@ type DashboardProps = Record<never, string>;
 const Dashboard: NextPage<DashboardProps> = ({}) => {
   const map = useRef<MapRef>(null);
 
+  const [connected, setConnected] = useState(false);
+
   const { connection, openConnection } = useMqtt();
 
   useEffect(() => {
-    if (connection == null) return;
+    if (connection == null) {
+      setConnected(false);
+      return;
+    }
+
+    connection.on("connect", () => {
+      setConnected(true);
+      console.log("connected");
+    });
 
     connection.on("close", () => {
       openConnection();
@@ -35,6 +45,10 @@ const Dashboard: NextPage<DashboardProps> = ({}) => {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
+      <p className="text-black">
+        Connected:
+        {String(connected)}
+      </p>
       <Map
         mapboxAccessToken="pk.eyJ1IjoiZXl1YjIwMDEiLCJhIjoiY2xpeDYydThxMDR3YzNzcW10cjNoeXI2dSJ9.S8sjCUJxSfbzIbOj-7vWNA"
         accessToken="pk.eyJ1IjoiZXl1YjIwMDEiLCJhIjoiY2xpeDYydThxMDR3YzNzcW10cjNoeXI2dSJ9.S8sjCUJxSfbzIbOj-7vWNA"

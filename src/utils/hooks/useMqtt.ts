@@ -46,5 +46,6 @@ export const useMqtt = () => {
   return {
     connection: client,
     openConnection,
+    connected: client?.connected,
   };
 };

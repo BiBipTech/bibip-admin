@@ -14,7 +14,7 @@ const GenericActionIconButton: FunctionComponent<
 > = ({ action, disabled, className, Icon }) => {
   const finalClass = twMerge(
     `
-      flex-1 items-center justify-center rounded-md 
+       items-center justify-center rounded-md 
       border border-blue-600 bg-white
       px-2 py-2 text-blue-600 shadow-sm
       transition-all duration-150
@@ -22,12 +22,12 @@ const GenericActionIconButton: FunctionComponent<
       disabled:pointer-events-none disabled:border-blue-300
       disabled:text-blue-300
     `,
-    className
+    className,
   );
 
   return (
     <button className={finalClass} onClick={action} disabled={disabled}>
-      <Icon size={24} />
+      <Icon size={20} />
     </button>
   );
 };

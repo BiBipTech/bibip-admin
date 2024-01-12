@@ -1,9 +1,10 @@
 import { type NextPage } from "next";
-import GenericActionButton from "~/components/buttons/GenericActionButton";
+import { useEffect, useState } from "react";
 import List from "~/components/list/List";
 import VehicleTile from "~/components/list/tiles/VehicleTile";
 import CarTileSkeleton from "~/components/skeletons/CarTileSkeleton";
 import { api } from "~/utils/api";
+import { useMqtt } from "~/utils/hooks/useMqtt";
 
 type VehiclesProps = Record<never, string>;
 
@@ -14,10 +15,35 @@ const Vehicles: NextPage<VehiclesProps> = ({}) => {
     isFetched: carsFetched,
     refetch: refetchCars,
   } = api.vehicle.listBiBipCars.useQuery(undefined, {
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
   });
 
   const isLoading = carsLoading;
+
+  const [connected, setConnected] = useState(false);
+
+  const { connection, openConnection } = useMqtt();
+
+  useEffect(() => {
+    if (connection == null) {
+      setConnected(false);
+      return;
+    }
+
+    connection.on("connect", () => {
+      setConnected(true);
+      console.log("connected");
+    });
+
+    connection.on("close", () => {
+      openConnection();
+      console.log("close");
+    });
+
+    return () => {
+      connection.removeAllListeners();
+    };
+  }, [connection, openConnection]);
 
   if (isLoading)
     return (
@@ -36,65 +62,38 @@ const Vehicles: NextPage<VehiclesProps> = ({}) => {
     <div className="h-full w-full rounded-md bg-white">
       <div className="shadow-eq-md h-full w-full rounded-md border border-gray-300 bg-white px-8 py-12">
         <p className="text-xl font-semibold">Araçlar</p>
-        <div className="mt-2 flex flex-row gap-2">
-          {/* <SelectInput
-              items={[
-                { value: CarModel.MEGAN, label: "Megane" },
-                { value: CarModel.PASSAT, label: "Passat" },
-              ]}
-              onChange={(e) => {
-                setModelFilter(
-                  e.map(
-                    (x) =>
-                      (
-                        x as unknown as {
-                          value: keyof typeof CarModel;
-                          label: string;
-                        }
-                      ).value
-                  )
-                );
-              }}
-              placeholder="Model Seçiniz"
-              selectedItem={{ label: "", value: "" }}
-              name="selectedModel"
-            />
-            <SelectInput
-              items={[
-                { value: Car_status.FINISHED, label: "Müsait" },
-                { value: Car_status.IN_PROGRESS, label: "Kullanımda" },
-              ]}
-              onChange={(e) =>
-                setAvailabilityFilter(
-                  e.map(
-                    (x) =>
-                      (
-                        x as unknown as {
-                          value: keyof typeof Car_status;
-                          label: string;
-                        }
-                      ).value
-                  )
-                )
-              }
-              placeholder="Müsaitlik Durumu"
-              selectedItem={{ label: "", value: "" }}
-              name="selectedAvailability"
-            /> */}
-          <GenericActionButton
-            // className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-            action={() => {
-              // applyFilters().then(undefined).catch(undefined);
-            }}
-            text="Uygula"
-          />
-        </div>
         {carsFetched && (
           <List
             elements={cars ?? []}
-            headers={["Müsaitlik", "Araç", "Yakıt Durumu"]}
+            headers={["Müsaitlik", "Araç", "Yakıt Durumu", "Actions"]}
             elementMapper={(car) => (
-              <VehicleTile car={car} key={car.id} refetchCars={refetchCars} />
+              <VehicleTile
+                car={car}
+                key={car.id}
+                refetchCars={refetchCars}
+                lock={() => {
+                  if (connected) {
+                    connection?.publish(
+                      `car-info/${car.id}`,
+                      JSON.stringify({
+                        lock: "true",
+                      }),
+                    );
+                  }
+                }}
+                unlock={() => {
+                  console.log(connected, car.id);
+
+                  if (connected) {
+                    connection?.publish(
+                      `car-info/${car.id}`,
+                      JSON.stringify({
+                        lock: "false",
+                      }),
+                    );
+                  }
+                }}
+              />
             )}
           />
         )}

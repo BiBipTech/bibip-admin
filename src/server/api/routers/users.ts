@@ -18,23 +18,36 @@ export const userRouter = createTRPCRouter({
           },
         },
       );
+      console.log(usersDocumentsResponse.data);
 
       const usersDocuments = usersDocumentsResponse.data as {
+        paginationKey: string;
         users: {
-          Attributes: {
-            Name:
-              | "phone_number"
-              | "name"
-              | "custom:id_confirmed"
-              | "custom:photo_confirmed"
-              | "custom:license_confirmed";
-            Value: string;
-          }[];
-          Username: string;
+          idConfirmed: {
+            S: "true" | "false" | "waiting";
+          };
+          photoConfirmed: {
+            S: "true" | "false" | "waiting";
+          };
+          licenseConfirmed: {
+            S: "true" | "false" | "waiting";
+          };
+          id: {
+            S: string;
+          };
+          name: {
+            S: string;
+          };
+          username: {
+            S: string;
+          };
+          citizenId: {
+            S: string;
+          };
         }[];
       };
 
-      return usersDocuments.users;
+      return usersDocuments;
     },
   ),
 });

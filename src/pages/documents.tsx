@@ -18,31 +18,19 @@ const Documents: NextPage = () => {
   });
 
   // useLoader([usersWaiting]);
+  console.log(users);
 
   return (
     <div className="grid grid-cols-4 gap-4 p-4">
       {usersLoaded &&
-        users?.map((user) => (
+        users?.users.map((user) => (
           <UserCard
-            key={user.Username}
-            name={
-              user.Attributes.filter((a) => a.Name === "name")[0]?.Value ?? ""
-            }
-            id_confirmed={
-              user.Attributes.filter((a) => a.Name === "custom:id_confirmed")[0]
-                ?.Value ?? ""
-            }
-            license_confirmed={
-              user.Attributes.filter(
-                (a) => a.Name === "custom:license_confirmed",
-              )[0]?.Value ?? ""
-            }
-            photo_confirmed={
-              user.Attributes.filter(
-                (a) => a.Name === "custom:photo_confirmed",
-              )[0]?.Value ?? ""
-            }
-            username={user.Username}
+            key={user.username.S}
+            name={user.name.S ?? ""}
+            id_confirmed={user.idConfirmed.S}
+            license_confirmed={user.licenseConfirmed.S}
+            photo_confirmed={user.photoConfirmed.S}
+            username={user.username.S}
           />
         ))}
       {usersWaiting && (

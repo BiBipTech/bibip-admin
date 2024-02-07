@@ -1,0 +1,45 @@
+/***************************************************************************
+ * The contents of this file were generated with Amplify Studio.           *
+ * Please refrain from making any modifications to this file.              *
+ * Any changes to this file will be overwritten when running amplify pull. *
+ **************************************************************************/
+
+import * as React from "react";
+import { GridProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
+export declare type ValidationResponse = {
+    hasError: boolean;
+    errorMessage?: string;
+};
+export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
+export declare type CarCreateFormInputValues = {
+    name?: string;
+    inUse?: boolean;
+    battery?: number;
+    connected?: boolean;
+};
+export declare type CarCreateFormValidationValues = {
+    name?: ValidationFunction<string>;
+    inUse?: ValidationFunction<boolean>;
+    battery?: ValidationFunction<number>;
+    connected?: ValidationFunction<boolean>;
+};
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type CarCreateFormOverridesProps = {
+    CarCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+    name?: PrimitiveOverrideProps<TextFieldProps>;
+    inUse?: PrimitiveOverrideProps<SwitchFieldProps>;
+    battery?: PrimitiveOverrideProps<TextFieldProps>;
+    connected?: PrimitiveOverrideProps<SwitchFieldProps>;
+} & EscapeHatchProps;
+export declare type CarCreateFormProps = React.PropsWithChildren<{
+    overrides?: CarCreateFormOverridesProps | undefined | null;
+} & {
+    clearOnSuccess?: boolean;
+    onSubmit?: (fields: CarCreateFormInputValues) => CarCreateFormInputValues;
+    onSuccess?: (fields: CarCreateFormInputValues) => void;
+    onError?: (fields: CarCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: CarCreateFormInputValues) => CarCreateFormInputValues;
+    onValidate?: CarCreateFormValidationValues;
+} & React.CSSProperties>;
+export default function CarCreateForm(props: CarCreateFormProps): React.ReactElement;

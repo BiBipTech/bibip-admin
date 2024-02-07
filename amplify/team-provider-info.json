@@ -14,9 +14,6 @@
       "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-bibipapp-staging-204655-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
-      "auth": {
-        "bibipapp5f65708e5f65708e": {}
-      },
       "function": {
         "bibipapp5f65708e5f65708eCreateAuthChallenge": {
           "deploymentBucketName": "amplify-bibipapp-staging-204655-deployment",
@@ -34,6 +31,9 @@
           "deploymentBucketName": "amplify-bibipapp-staging-204655-deployment",
           "s3Key": "amplify-builds/testPublish-7578482b726e6c4c6c6b-build.zip"
         }
+      },
+      "auth": {
+        "bibipapp5f65708e5f65708e": {}
       },
       "storage": {
         "s3bibipappstorage8f58d563": {}

@@ -17,6 +17,10 @@
         "cognitoUserPoolId": "authbibipapp5f65708e5f65708e"
       }
     ],
-    "conflictResolution": {}
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "AUTOMERGE"
+      }
+    }
   }
 }

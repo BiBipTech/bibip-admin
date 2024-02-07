@@ -2,6 +2,79 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      Username
+      Attributes {
+        Name
+        Value
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        Username
+        Attributes {
+          Name
+          Value
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncUsers = /* GraphQL */ `
+  query SyncUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        Username
+        Attributes {
+          Name
+          Value
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getTrip = /* GraphQL */ `
   query GetTrip($id: ID!) {
     getTrip(id: $id) {
@@ -10,7 +83,6 @@ export const getTrip = /* GraphQL */ `
       time {
         start
         end
-        __typename
       }
       user
       carID
@@ -25,7 +97,6 @@ export const getTrip = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -42,7 +113,6 @@ export const listTrips = /* GraphQL */ `
         time {
           start
           end
-          __typename
         }
         user
         carID
@@ -57,11 +127,9 @@ export const listTrips = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        __typename
       }
       nextToken
       startedAt
-      __typename
     }
   }
 `;
@@ -84,7 +152,6 @@ export const syncTrips = /* GraphQL */ `
         time {
           start
           end
-          __typename
         }
         user
         carID
@@ -99,11 +166,9 @@ export const syncTrips = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        __typename
       }
       nextToken
       startedAt
-      __typename
     }
   }
 `;
@@ -115,7 +180,6 @@ export const getCar = /* GraphQL */ `
       location {
         lat
         lng
-        __typename
       }
       inUse
       battery
@@ -126,7 +190,6 @@ export const getCar = /* GraphQL */ `
           time {
             start
             end
-            __typename
           }
           user
           carID
@@ -141,18 +204,16 @@ export const getCar = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          __typename
         }
         nextToken
         startedAt
-        __typename
       }
+      connected
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -169,7 +230,6 @@ export const listCars = /* GraphQL */ `
         location {
           lat
           lng
-          __typename
         }
         inUse
         battery
@@ -180,7 +240,6 @@ export const listCars = /* GraphQL */ `
             time {
               start
               end
-              __typename
             }
             user
             carID
@@ -195,22 +254,19 @@ export const listCars = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            __typename
           }
           nextToken
           startedAt
-          __typename
         }
+        connected
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        __typename
       }
       nextToken
       startedAt
-      __typename
     }
   }
 `;
@@ -233,7 +289,6 @@ export const syncCars = /* GraphQL */ `
         location {
           lat
           lng
-          __typename
         }
         inUse
         battery
@@ -244,7 +299,6 @@ export const syncCars = /* GraphQL */ `
             time {
               start
               end
-              __typename
             }
             user
             carID
@@ -259,22 +313,19 @@ export const syncCars = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            __typename
           }
           nextToken
           startedAt
-          __typename
         }
+        connected
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        __typename
       }
       nextToken
       startedAt
-      __typename
     }
   }
 `;

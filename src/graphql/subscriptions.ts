@@ -2,6 +2,57 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
+    onCreateUser(filter: $filter) {
+      id
+      Username
+      Attributes {
+        Name
+        Value
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
+    onUpdateUser(filter: $filter) {
+      id
+      Username
+      Attributes {
+        Name
+        Value
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
+    onDeleteUser(filter: $filter) {
+      id
+      Username
+      Attributes {
+        Name
+        Value
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateTrip = /* GraphQL */ `
   subscription OnCreateTrip($filter: ModelSubscriptionTripFilterInput) {
     onCreateTrip(filter: $filter) {
@@ -10,7 +61,6 @@ export const onCreateTrip = /* GraphQL */ `
       time {
         start
         end
-        __typename
       }
       user
       carID
@@ -25,7 +75,6 @@ export const onCreateTrip = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -37,7 +86,6 @@ export const onUpdateTrip = /* GraphQL */ `
       time {
         start
         end
-        __typename
       }
       user
       carID
@@ -52,7 +100,6 @@ export const onUpdateTrip = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -64,7 +111,6 @@ export const onDeleteTrip = /* GraphQL */ `
       time {
         start
         end
-        __typename
       }
       user
       carID
@@ -79,7 +125,6 @@ export const onDeleteTrip = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -91,7 +136,6 @@ export const onCreateCar = /* GraphQL */ `
       location {
         lat
         lng
-        __typename
       }
       inUse
       battery
@@ -102,7 +146,6 @@ export const onCreateCar = /* GraphQL */ `
           time {
             start
             end
-            __typename
           }
           user
           carID
@@ -117,18 +160,16 @@ export const onCreateCar = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          __typename
         }
         nextToken
         startedAt
-        __typename
       }
+      connected
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -140,7 +181,6 @@ export const onUpdateCar = /* GraphQL */ `
       location {
         lat
         lng
-        __typename
       }
       inUse
       battery
@@ -151,7 +191,6 @@ export const onUpdateCar = /* GraphQL */ `
           time {
             start
             end
-            __typename
           }
           user
           carID
@@ -166,18 +205,16 @@ export const onUpdateCar = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          __typename
         }
         nextToken
         startedAt
-        __typename
       }
+      connected
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -189,7 +226,6 @@ export const onDeleteCar = /* GraphQL */ `
       location {
         lat
         lng
-        __typename
       }
       inUse
       battery
@@ -200,7 +236,6 @@ export const onDeleteCar = /* GraphQL */ `
           time {
             start
             end
-            __typename
           }
           user
           carID
@@ -215,18 +250,16 @@ export const onDeleteCar = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          __typename
         }
         nextToken
         startedAt
-        __typename
       }
+      connected
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;

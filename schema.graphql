@@ -1,0 +1,411 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Car {
+  _lastChangedAt: AWSTimestamp!
+  _version: Int!
+  battery: Float!
+  connected: Boolean
+  createdAt: AWSDateTime!
+  id: String!
+  inUse: Boolean!
+  location: Location!
+  name: String!
+  updatedAt: AWSDateTime!
+}
+
+type CarConnection {
+  items: [Car]
+  nextToken: String
+}
+
+type Location {
+  lat: Float!
+  lng: Float!
+}
+
+type Mutation {
+  createCar(input: CreateCarInput!): Car
+  createSocarCar(input: CreateSocarCarInput!): SocarCar
+  createSocarDriver(input: CreateSocarDriverInput!): SocarDriver
+  createSocarMission(input: CreateSocarMissionInput!): SocarMission
+  createSocarReservation(input: CreateSocarReservationInput!): SocarReservation
+  deleteCar(input: DeleteCarInput!): Car
+  deleteSocarCar(input: DeleteSocarCarInput!): SocarCar
+  deleteSocarDriver(input: DeleteSocarDriverInput!): SocarDriver
+  deleteSocarMission(input: DeleteSocarMissionInput!): SocarMission
+  deleteSocarReservation(input: DeleteSocarReservationInput!): SocarReservation
+  updateCar(input: UpdateCarInput!): Car
+  updateSocarCar(input: UpdateSocarCarInput!): SocarCar
+  updateSocarDriver(input: UpdateSocarDriverInput!): SocarDriver
+  updateSocarMission(input: UpdateSocarMissionInput!): SocarMission
+  updateSocarReservation(input: UpdateSocarReservationInput!): SocarReservation
+}
+
+type Query {
+  getCar(id: String!): Car
+  getSocarCar(id: ID!): SocarCar
+  getSocarDriver(id: ID!): SocarDriver
+  getSocarMission(id: String!): SocarMission
+  getSocarReservation(id: ID!): SocarReservation
+  listCars(filter: TableCarFilterInput, limit: Int, nextToken: String): CarConnection
+  listSocarCars(filter: TableSocarCarFilterInput, limit: Int, nextToken: String): SocarCarConnection
+  listSocarDrivers(filter: TableSocarDriverFilterInput, limit: Int, nextToken: String): SocarDriverConnection
+  listSocarMissions(filter: TableSocarMissionFilterInput, limit: Int, nextToken: String): SocarMissionConnection
+  listSocarReservations(filter: TableSocarReservationFilterInput, limit: Int, nextToken: String): SocarReservationConnection
+}
+
+type SocarCar {
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+  _version: Int!
+  createdAt: AWSDateTime!
+  currentDriverId: ID
+  currentDriverName: String
+  currentMission: String
+  fault: Fault!
+  fuelStatus: Float!
+  id: ID!
+  location: Location!
+  name: String!
+  plateNo: String!
+  status: CarStatus!
+  updatedAt: AWSDateTime!
+}
+
+type SocarCarConnection {
+  items: [SocarCar]
+  nextToken: String
+}
+
+type SocarDriver {
+  currentCar: ID
+  currentMission: ID
+  id: ID!
+  name: String!
+  status: DriverStatus
+  surname: String!
+}
+
+type SocarDriverConnection {
+  items: [SocarDriver]
+  nextToken: String
+}
+
+type SocarMission {
+  assignedTo: ID
+  currentStatus: MissionStatus!
+  id: String!
+  missionDesc: String
+  missionName: String!
+}
+
+type SocarMissionConnection {
+  items: [SocarMission]
+  nextToken: String
+}
+
+type SocarReservation {
+  allDay: Boolean!
+  car: ID!
+  end: AWSTimestamp!
+  id: ID!
+  start: AWSTimestamp!
+  title: String!
+}
+
+type SocarReservationConnection {
+  items: [SocarReservation]
+  nextToken: String
+}
+
+type Subscription {
+  onCreateCar(_lastChangedAt: AWSTimestamp, _version: Int, battery: Float, id: String): Car @aws_subscribe(mutations : ["createCar"])
+  onCreateSocarCar(currentDriverId: ID, currentDriverName: String, id: ID, name: String, plateNo: String): SocarCar @aws_subscribe(mutations : ["createSocarCar"])
+  onCreateSocarDriver(currentCar: ID, currentMission: ID, id: ID, name: String, surname: String): SocarDriver @aws_subscribe(mutations : ["createSocarDriver"])
+  onCreateSocarMission(assignedTo: ID, id: String, missionDesc: String, missionName: String): SocarMission @aws_subscribe(mutations : ["createSocarMission"])
+  onCreateSocarReservation(allDay: Boolean, car: ID, end: AWSTimestamp, id: ID, start: AWSTimestamp): SocarReservation @aws_subscribe(mutations : ["createSocarReservation"])
+  onDeleteCar(_lastChangedAt: Long, _version: Int, battery: Float, id: String): Car
+  onDeleteSocarCar(currentDriverId: ID, currentDriverName: String, id: ID, name: String, plateNo: String): SocarCar @aws_subscribe(mutations : ["deleteSocarCar"])
+  onDeleteSocarDriver(currentCar: ID, currentMission: ID, id: ID, name: String, surname: String): SocarDriver @aws_subscribe(mutations : ["deleteSocarDriver"])
+  onDeleteSocarMission(assignedTo: ID, id: String, missionDesc: String, missionName: String): SocarMission @aws_subscribe(mutations : ["deleteSocarMission"])
+  onDeleteSocarReservation(allDay: Boolean, car: ID, end: AWSTimestamp, id: ID, start: AWSTimestamp): SocarReservation @aws_subscribe(mutations : ["deleteSocarReservation"])
+  onUpdateCar(_lastChangedAt: Long, _version: Int, battery: Float, id: String): Car @aws_subscribe(mutations : ["updateCar"])
+  onUpdateSocarCar(currentDriverId: ID, currentDriverName: String, id: ID, name: String, plateNo: String): SocarCar @aws_subscribe(mutations : ["updateSocarCar"])
+  onUpdateSocarDriver(currentCar: ID, currentMission: ID, id: ID, name: String, surname: String): SocarDriver @aws_subscribe(mutations : ["updateSocarDriver"])
+  onUpdateSocarMission(assignedTo: ID, id: String, missionDesc: String, missionName: String): SocarMission @aws_subscribe(mutations : ["updateSocarMission"])
+  onUpdateSocarReservation(allDay: Boolean, car: ID, end: AWSTimestamp, id: ID, start: AWSTimestamp): SocarReservation @aws_subscribe(mutations : ["updateSocarReservation"])
+}
+
+enum CarStatus {
+  CANCELED
+  FINISHED
+  IN_PROGRESS
+}
+
+enum DriverStatus {
+  AVAILABLE
+  BUSY
+  IN_MISSION
+}
+
+enum Fault {
+  BRAKE_FAULT
+  MAINTENANCE
+  NO_FAULT
+}
+
+enum MissionStatus {
+  ASSIGNED
+  FINISHED
+  WAITING
+}
+
+input CreateCarInput {
+  _lastChangedAt: AWSTimestamp!
+  _version: Int!
+  battery: Float!
+  createdAt: AWSDateTime!
+  id: String!
+  inUse: Boolean!
+  name: String!
+  updatedAt: AWSDateTime!
+}
+
+input CreateSocarCarInput {
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+  _version: Int!
+  createdAt: AWSDateTime!
+  currentDriverId: ID
+  currentDriverName: String
+  currentMission: String
+  fuelStatus: Float!
+  id: ID!
+  name: String!
+  plateNo: String!
+  updatedAt: AWSDateTime!
+}
+
+input CreateSocarDriverInput {
+  currentCar: ID
+  currentMission: ID
+  id: ID!
+  name: String!
+  status: DriverStatus!
+  surname: String!
+}
+
+input CreateSocarMissionInput {
+  assignedTo: ID
+  currentStatus: MissionStatus!
+  id: String!
+  missionDesc: String
+  missionName: String!
+}
+
+input CreateSocarReservationInput {
+  allDay: Boolean!
+  car: ID!
+  end: AWSTimestamp!
+  id: ID!
+  start: AWSTimestamp!
+  title: String!
+}
+
+input DeleteCarInput {
+  id: String!
+}
+
+input DeleteSocarCarInput {
+  id: ID!
+}
+
+input DeleteSocarDriverInput {
+  id: ID!
+}
+
+input DeleteSocarMissionInput {
+  id: String!
+}
+
+input DeleteSocarReservationInput {
+  id: ID!
+}
+
+input TableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input TableCarFilterInput {
+  _lastChangedAt: TableLongFilterInput
+  _version: TableIntFilterInput
+  battery: TableFloatFilterInput
+  createdAt: TableStringFilterInput
+  id: TableStringFilterInput
+  inUse: TableBooleanFilterInput
+  name: TableStringFilterInput
+  updatedAt: TableStringFilterInput
+}
+
+input TableFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input TableIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+}
+
+input TableIntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
+}
+
+input TableLongFilterInput {
+  between: [Long]
+  contains: Long
+  eq: Long
+  ge: Long
+  gt: Long
+  le: Long
+  lt: Long
+  ne: Long
+  notContains: Long
+}
+
+input TableMissionStatusFilterInput {
+  eq: MissionStatus
+}
+
+input TableSocarCarFilterInput {
+  _deleted: TableBooleanFilterInput
+  _lastChangedAt: TableIntFilterInput
+  _version: TableIntFilterInput
+  createdAt: TableStringFilterInput
+  currentDriverId: TableIDFilterInput
+  currentDriverName: TableStringFilterInput
+  currentMission: TableStringFilterInput
+  fuelStatus: TableFloatFilterInput
+  id: TableIDFilterInput
+  name: TableStringFilterInput
+  plateNo: TableStringFilterInput
+  updatedAt: TableStringFilterInput
+}
+
+input TableSocarDriverFilterInput {
+  currentCar: TableIDFilterInput
+  currentMission: TableIDFilterInput
+  id: TableIDFilterInput
+  name: TableStringFilterInput
+  surname: TableStringFilterInput
+}
+
+input TableSocarMissionFilterInput {
+  assignedTo: TableIDFilterInput
+  currentStatus: TableMissionStatusFilterInput
+  id: TableStringFilterInput
+  missionDesc: TableStringFilterInput
+  missionName: TableStringFilterInput
+}
+
+input TableSocarReservationFilterInput {
+  allDay: TableBooleanFilterInput
+  car: TableIDFilterInput
+  end: TableIntFilterInput
+  id: TableIDFilterInput
+  start: TableIntFilterInput
+  title: TableStringFilterInput
+}
+
+input TableStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
+
+input UpdateCarInput {
+  _lastChangedAt: AWSTimestamp
+  _version: Int
+  battery: Float
+  createdAt: AWSDateTime
+  id: String!
+  inUse: Boolean
+  name: String
+  updatedAt: AWSDateTime
+}
+
+input UpdateSocarCarInput {
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp
+  _version: Int
+  createdAt: AWSDateTime
+  currentDriverId: ID
+  currentDriverName: String
+  currentMission: String
+  fuelStatus: Float
+  id: ID!
+  name: String
+  plateNo: String
+  updatedAt: AWSDateTime
+}
+
+input UpdateSocarDriverInput {
+  currentCar: ID
+  currentMission: ID
+  id: ID!
+  name: String
+  status: DriverStatus
+  surname: String
+}
+
+input UpdateSocarMissionInput {
+  assignedTo: ID
+  currentStatus: MissionStatus
+  id: String!
+  missionDesc: String
+  missionName: String
+}
+
+input UpdateSocarReservationInput {
+  allDay: Boolean
+  car: ID
+  end: AWSTimestamp
+  id: ID!
+  start: AWSTimestamp
+  title: String
+}

@@ -1,5 +1,74 @@
 export const schema = {
     "models": {
+        "User": {
+            "name": "User",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Username": {
+                    "name": "Username",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Attributes": {
+                    "name": "Attributes",
+                    "isArray": true,
+                    "type": {
+                        "nonModel": "Attribute"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Users",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Trip": {
             "name": "Trip",
             "fields": {
@@ -198,6 +267,13 @@ export const schema = {
                         ]
                     }
                 },
+                "connected": {
+                    "name": "connected",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -252,6 +328,25 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {
+        "Attribute": {
+            "name": "Attribute",
+            "fields": {
+                "Name": {
+                    "name": "Name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Value": {
+                    "name": "Value",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        },
         "Time": {
             "name": "Time",
             "fields": {
@@ -291,6 +386,6 @@ export const schema = {
             }
         }
     },
-    "codegenVersion": "3.4.4",
-    "version": "8f79b9b016a9bdc576bed0cf131627be"
+    "codegenVersion": "3.4.0",
+    "version": "4c96a58af5293b17b8ea9113b11b04f4"
 };

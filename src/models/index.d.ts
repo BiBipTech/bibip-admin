@@ -4,6 +4,20 @@ import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/
 
 
 
+type EagerAttribute = {
+  readonly Name?: string | null;
+  readonly Value?: string | null;
+}
+
+type LazyAttribute = {
+  readonly Name?: string | null;
+  readonly Value?: string | null;
+}
+
+export declare type Attribute = LazyLoading extends LazyLoadingDisabled ? EagerAttribute : LazyAttribute
+
+export declare const Attribute: (new (init: ModelInit<Attribute>) => Attribute)
+
 type EagerTime = {
   readonly start?: number | null;
   readonly end?: number | null;
@@ -31,6 +45,36 @@ type LazyLocation = {
 export declare type Location = LazyLoading extends LazyLoadingDisabled ? EagerLocation : LazyLocation
 
 export declare const Location: (new (init: ModelInit<Location>) => Location)
+
+type EagerUser = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<User, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly Username?: string | null;
+  readonly Attributes?: (Attribute | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyUser = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<User, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly Username?: string | null;
+  readonly Attributes?: (Attribute | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser : LazyUser
+
+export declare const User: (new (init: ModelInit<User>) => User) & {
+  copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
+}
 
 type EagerTrip = {
   readonly [__modelMeta__]: {
@@ -89,6 +133,7 @@ type EagerCar = {
   readonly inUse?: boolean | null;
   readonly battery?: number | null;
   readonly Trips?: (Trip | null)[] | null;
+  readonly connected?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -104,6 +149,7 @@ type LazyCar = {
   readonly inUse?: boolean | null;
   readonly battery?: number | null;
   readonly Trips: AsyncCollection<Trip>;
+  readonly connected?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

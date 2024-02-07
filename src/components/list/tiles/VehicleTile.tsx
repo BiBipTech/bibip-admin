@@ -3,12 +3,13 @@ import {
   type RefetchOptions,
   type RefetchQueryFilters,
 } from "@tanstack/react-query";
-import { useState, type FunctionComponent } from "react";
+import { type FunctionComponent } from "react";
 import { AiOutlineLock, AiOutlineUnlock } from "react-icons/ai";
 import { type Car } from "~/API";
 import ProgressBar from "~/components/bars/ProgressBar";
 import GenericActionIconButton from "~/components/buttons/GenericActionIconButton";
 import AvailabilityCard from "~/components/cards/AvailabilityCard";
+import ConnectedCard from "~/components/cards/ConnectedCard";
 
 export interface CarTileProps {
   car: Car;
@@ -19,18 +20,16 @@ export interface CarTileProps {
   unlock: () => void;
 }
 
-const CarTile: FunctionComponent<CarTileProps> = ({
-  car,
-  refetchCars,
-  lock,
-  unlock,
-}) => {
-  const [visible, setVisible] = useState(false);
+const CarTile: FunctionComponent<CarTileProps> = ({ car, lock, unlock }) => {
+  console.log(car.connected);
 
   return (
     <tr key={car.id} className="items-center ">
       <td className="px-4 py-5 text-center">
         <AvailabilityCard inUse={car.inUse ?? true} />
+      </td>
+      <td className="px-4 py-5 text-center">
+        <ConnectedCard connected={car.connected ?? false} />
       </td>
       <td className="px-4 py-5 text-center">
         {car.name ? (

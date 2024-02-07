@@ -2,6 +2,66 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      Username
+      Attributes {
+        Name
+        Value
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      Username
+      Attributes {
+        Name
+        Value
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      Username
+      Attributes {
+        Name
+        Value
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const createTrip = /* GraphQL */ `
   mutation CreateTrip(
     $input: CreateTripInput!
@@ -13,7 +73,6 @@ export const createTrip = /* GraphQL */ `
       time {
         start
         end
-        __typename
       }
       user
       carID
@@ -28,7 +87,6 @@ export const createTrip = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -43,7 +101,6 @@ export const updateTrip = /* GraphQL */ `
       time {
         start
         end
-        __typename
       }
       user
       carID
@@ -58,7 +115,6 @@ export const updateTrip = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -73,7 +129,6 @@ export const deleteTrip = /* GraphQL */ `
       time {
         start
         end
-        __typename
       }
       user
       carID
@@ -88,7 +143,6 @@ export const deleteTrip = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -103,7 +157,6 @@ export const createCar = /* GraphQL */ `
       location {
         lat
         lng
-        __typename
       }
       inUse
       battery
@@ -114,7 +167,6 @@ export const createCar = /* GraphQL */ `
           time {
             start
             end
-            __typename
           }
           user
           carID
@@ -129,18 +181,16 @@ export const createCar = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          __typename
         }
         nextToken
         startedAt
-        __typename
       }
+      connected
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -155,7 +205,6 @@ export const updateCar = /* GraphQL */ `
       location {
         lat
         lng
-        __typename
       }
       inUse
       battery
@@ -166,7 +215,6 @@ export const updateCar = /* GraphQL */ `
           time {
             start
             end
-            __typename
           }
           user
           carID
@@ -181,18 +229,16 @@ export const updateCar = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          __typename
         }
         nextToken
         startedAt
-        __typename
       }
+      connected
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;
@@ -207,7 +253,6 @@ export const deleteCar = /* GraphQL */ `
       location {
         lat
         lng
-        __typename
       }
       inUse
       battery
@@ -218,7 +263,6 @@ export const deleteCar = /* GraphQL */ `
           time {
             start
             end
-            __typename
           }
           user
           carID
@@ -233,18 +277,16 @@ export const deleteCar = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          __typename
         }
         nextToken
         startedAt
-        __typename
       }
+      connected
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      __typename
     }
   }
 `;

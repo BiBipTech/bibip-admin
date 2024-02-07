@@ -1,5 +1,5 @@
 import { type NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import List from "~/components/list/List";
 import VehicleTile from "~/components/list/tiles/VehicleTile";
 import CarTileSkeleton from "~/components/skeletons/CarTileSkeleton";
@@ -20,30 +20,30 @@ const Vehicles: NextPage<VehiclesProps> = ({}) => {
 
   const isLoading = carsLoading;
 
-  const [connected, setConnected] = useState(false);
+  const [connected] = useState(false);
 
-  const { connection, openConnection } = useMqtt();
+  const { connection } = useMqtt();
 
-  useEffect(() => {
-    if (connection == null) {
-      setConnected(false);
-      return;
-    }
+  // useEffect(() => {
+  //   if (connection == null) {
+  //     setConnected(false);
+  //     return;
+  //   }
 
-    connection.on("connect", () => {
-      setConnected(true);
-      console.log("connected");
-    });
+  //   connection.on("connect", () => {
+  //     setConnected(true);
+  //     console.log("connected");
+  //   });
 
-    connection.on("close", () => {
-      openConnection();
-      console.log("close");
-    });
+  //   connection.on("close", () => {
+  //     openConnection();
+  //     console.log("close");
+  //   });
 
-    return () => {
-      connection.removeAllListeners();
-    };
-  }, [connection, openConnection]);
+  //   return () => {
+  //     connection.removeAllListeners();
+  //   };
+  // }, [connection, openConnection]);
 
   if (isLoading)
     return (
@@ -65,7 +65,13 @@ const Vehicles: NextPage<VehiclesProps> = ({}) => {
         {carsFetched && (
           <List
             elements={cars ?? []}
-            headers={["Müsaitlik", "Araç", "Yakıt Durumu", "Actions"]}
+            headers={[
+              "Müsaitlik",
+              "Kart Durumu",
+              "Araç",
+              "Yakıt Durumu",
+              "Actions",
+            ]}
             elementMapper={(car) => (
               <VehicleTile
                 car={car}
@@ -82,8 +88,6 @@ const Vehicles: NextPage<VehiclesProps> = ({}) => {
                   }
                 }}
                 unlock={() => {
-                  console.log(connected, car.id);
-
                   if (connected) {
                     connection?.publish(
                       `car-info/${car.id}`,
